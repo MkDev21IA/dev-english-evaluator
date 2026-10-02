@@ -17,7 +17,7 @@ client = OpenAI(
 def get_git_diff() -> str:
     """Runs `git diff HEAD` and retrieves the commits what we added, commited, but still didn't push to the remote repository."""
     result = subprocess.run(["git", "diff", "main..HEAD"], capture_output=True, text=True)
-    return result.stdout.strip
+    return result.stdout.strip()
 
 def record_audio(filename="speech.wav", sample_rate=44100):
     """Captures microphone input using sounddevice until the user presses Enter."""

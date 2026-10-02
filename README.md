@@ -21,6 +21,52 @@ I am also using OpenRouter but you can use OpenAI normally, just change the mode
 5. Add your keys in `.env`
 6. Run with `python main.py`
 
+## Running from Any Repository (Global Alias)
+To use this evaluator across any git repository on your machine without navigating back to this directory:
+
+1. Add an alias to your `~/.bashrc`:
+```bash
+echo 'alias dev-english="'"$(pwd)"'/venv/bin/python '"$(pwd)"'/main.py"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+2. Go to any repository on your machine and run:
+```bash
+cd ~/.../other-project
+dev-english
+```
+
+### Audio Storage
+Temporary audio files (`speech.wav` and `feedback.mp3`) and `.env` are always saved inside the tool's directory (`dev-english-evaluator`), ensuring your other repositories stay clean and untracked.
+
+## Testing Each Stage
+You can test each component of the pipeline independently using the scripts inside the `tests/` directory:
+
+1. **Git Diff Detection:**
+   ```bash
+   python tests/test_01_git_diff.py
+   ```
+2. **Microphone Recording:**
+   ```bash
+   python tests/test_02_recording.py
+   ```
+3. **Audio Playback (Speaker Check):**
+   ```bash
+   python tests/test_03_playback.py
+   ```
+4. **Edge-TTS Voice Synthesis:**
+   ```bash
+   python tests/test_04_tts.py
+   ```
+5. **Speech-to-Text (Whisper via OpenRouter):**
+   ```bash
+   python tests/test_05_whisper.py
+   ```
+6. **LLM Evaluation (GPT-4o-mini via OpenRouter):**
+   ```bash
+   python tests/test_06_llm_eval.py
+   ```
+
 ## Attention
 `git diff main..HEAD` assumes you will always create a new branch, make changes and open a PULL REQUEST to the main.
 
